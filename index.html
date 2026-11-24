@@ -3,444 +3,312 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SocialHub - All Social Media in One Place</title>
+<title>SocialHub</title>
 
 <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
+*{box-sizing:border-box}
+body{
+ margin:0;
+ background:#0b1020;
+ color:white;
+ font-family:Arial,sans-serif;
 }
-
-body {
-    background: #0b1020;
-    color: white;
+header{
+ padding:18px;
+ background:#151c32;
+ display:flex;
+ justify-content:space-between;
+ align-items:center;
+ border-bottom:1px solid #293550;
 }
-
-header {
-    padding: 18px;
-    background: #151c32;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #283452;
+.logo{font-size:23px;font-weight:bold;color:#60a5fa}
+.container{max-width:900px;margin:auto;padding:15px}
+.hero{
+ background:linear-gradient(135deg,#4f46e5,#9333ea);
+ padding:25px;
+ border-radius:18px;
+ margin-bottom:20px;
 }
-
-.logo {
-    font-size: 23px;
-    font-weight: bold;
-    color: #60a5fa;
+.hero h1{margin-top:0}
+input,textarea{
+ width:100%;
+ padding:14px;
+ border-radius:10px;
+ border:none;
+ background:#1b2540;
+ color:white;
+ margin:10px 0;
+ font-size:16px;
 }
-
-.logo span {
-    color: white;
+.grid{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:12px;
 }
-
-.menu {
-    font-size: 24px;
-    cursor: pointer;
+.card{
+ background:#151c32;
+ border:1px solid #293550;
+ border-radius:14px;
+ padding:18px 10px;
+ text-align:center;
+ cursor:pointer;
 }
-
-.container {
-    padding: 15px;
-    max-width: 1100px;
-    margin: auto;
+.card:active{transform:scale(.97)}
+.icon{font-size:32px}
+.card h3{margin:8px 0}
+.card p{font-size:12px;color:#9ca3af}
+.section{margin:25px 0 15px}
+.post{
+ background:#151c32;
+ border:1px solid #293550;
+ border-radius:15px;
+ padding:18px;
+ margin-top:25px;
 }
-
-.welcome {
-    padding: 25px;
-    border-radius: 18px;
-    background: linear-gradient(135deg,#4f46e5,#7c3aed,#2563eb);
-    margin-bottom: 20px;
+.checks{
+ display:grid;
+ grid-template-columns:repeat(2,1fr);
+ gap:8px;
+ margin:15px 0;
 }
-
-.welcome h1 {
-    font-size: 25px;
-    margin-bottom: 10px;
+.check{
+ background:#202b45;
+ padding:12px;
+ border-radius:8px;
+ font-size:14px;
 }
-
-.welcome p {
-    color: #e0e7ff;
-    font-size: 14px;
+.check input{width:auto;margin:0 5px 0 0}
+button{
+ width:100%;
+ padding:14px;
+ border:0;
+ border-radius:10px;
+ background:#2563eb;
+ color:white;
+ font-size:16px;
+ font-weight:bold;
+ margin:7px 0;
+ cursor:pointer;
 }
-
-.search {
-    margin: 20px 0;
-}
-
-.search input {
-    width: 100%;
-    padding: 15px;
-    border-radius: 12px;
-    border: none;
-    outline: none;
-    background: #1b2540;
-    color: white;
-    font-size: 16px;
-}
-
-.section-title {
-    margin: 20px 0 15px;
-    font-size: 19px;
-}
-
-.grid {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 12px;
-}
-
-.platform {
-    background: #151c32;
-    padding: 20px 10px;
-    border-radius: 15px;
-    text-align: center;
-    border: 1px solid #273452;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.platform:hover {
-    transform: translateY(-3px);
-    border-color: #60a5fa;
-}
-
-.icon {
-    font-size: 35px;
-    margin-bottom: 10px;
-}
-
-.platform h3 {
-    font-size: 15px;
-    margin-bottom: 5px;
-}
-
-.platform p {
-    color: #9ca3af;
-    font-size: 12px;
-}
-
-button {
-    border: none;
-    cursor: pointer;
-}
-
-.action-button {
-    width: 100%;
-    padding: 15px;
-    border-radius: 12px;
-    background: #2563eb;
-    color: white;
-    font-size: 16px;
-    margin-top: 10px;
-}
-
-.action-button:hover {
-    background: #1d4ed8;
-}
-
-.post-box {
-    background: #151c32;
-    padding: 18px;
-    border-radius: 15px;
-    margin-top: 25px;
-    border: 1px solid #273452;
-}
-
-.post-box textarea {
-    width: 100%;
-    background: #0b1020;
-    color: white;
-    padding: 15px;
-    border: 1px solid #273452;
-    border-radius: 10px;
-    resize: vertical;
-    min-height: 120px;
-    outline: none;
-}
-
-.post-box h3 {
-    margin-bottom: 15px;
-}
-
-.platform-checks {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.check {
-    background: #202b45;
-    padding: 12px;
-    border-radius: 10px;
-    font-size: 13px;
-}
-
-.check input {
-    margin-right: 5px;
-}
-
-footer {
-    text-align: center;
-    padding: 30px;
-    color: #9ca3af;
-    font-size: 13px;
-}
-
-#status {
-    margin-top: 12px;
-    color: #86efac;
-    font-size: 14px;
-}
-
-.hidden {
-    display: none;
-}
+.secondary{background:#374151}
+#message{margin-top:12px;color:#86efac}
+footer{text-align:center;color:#9ca3af;padding:25px}
 </style>
 </head>
 
 <body>
 
 <header>
-    <div class="logo">Social<span>Hub</span> 🌐</div>
-    <div class="menu" onclick="scrollToPlatforms()">☰</div>
+<div class="logo">SocialHub 🌐</div>
+<div>ALL IN ONE</div>
 </header>
 
 <div class="container">
 
-    <section class="welcome">
-        <h1>Welcome to SocialHub 🚀</h1>
-        <p>Your social media platforms, all in one place.</p>
-        <p style="margin-top:15px;">Access your favorite social networks with one click.</p>
-    </section>
+<div class="hero">
+<h1>Welcome to SocialHub 🚀</h1>
+<p>All your social media platforms in one place.</p>
+<p>Choose a platform to open its official website.</p>
+</div>
 
-    <div class="search">
-        <input type="text" id="searchInput"
-        placeholder="🔍 Search social platforms..."
-        oninput="searchPlatforms()">
-    </div>
+<input id="search" placeholder="🔍 Search platforms..." oninput="search()">
 
-    <h2 class="section-title" id="platformTitle">🌐 Your Platforms</h2>
+<h2 class="section">Social Platforms</h2>
 
-    <div class="grid" id="platformGrid">
+<div class="grid" id="platforms">
 
-        <div class="platform" data-name="Facebook"
-        onclick="openPlatform('Facebook')">
-            <div class="icon">📘</div>
-            <h3>Facebook</h3>
-            <p>Connect with friends</p>
-        </div>
+<div class="card" data-name="facebook" onclick="openSite('facebook')">
+<div class="icon">📘</div><h3>Facebook</h3><p>Social networking</p>
+</div>
 
-        <div class="platform" data-name="Instagram"
-        onclick="openPlatform('Instagram')">
-            <div class="icon">📸</div>
-            <h3>Instagram</h3>
-            <p>Photos and reels</p>
-        </div>
+<div class="card" data-name="instagram" onclick="openSite('instagram')">
+<div class="icon">📸</div><h3>Instagram</h3><p>Photos and videos</p>
+</div>
 
-        <div class="platform" data-name="TikTok"
-        onclick="openPlatform('TikTok')">
-            <div class="icon">🎵</div>
-            <h3>TikTok</h3>
-            <p>Videos and trends</p>
-        </div>
+<div class="card" data-name="tiktok" onclick="openSite('tiktok')">
+<div class="icon">🎵</div><h3>TikTok</h3><p>Short videos</p>
+</div>
 
-        <div class="platform" data-name="YouTube"
-        onclick="openPlatform('YouTube')">
-            <div class="icon">▶️</div>
-            <h3>YouTube</h3>
-            <p>Watch and upload videos</p>
-        </div>
+<div class="card" data-name="youtube" onclick="openSite('youtube')">
+<div class="icon">▶️</div><h3>YouTube</h3><p>Videos</p>
+</div>
 
-        <div class="platform" data-name="WhatsApp"
-        onclick="openPlatform('WhatsApp')">
-            <div class="icon">💬</div>
-            <h3>WhatsApp</h3>
-            <p>Messages and calls</p>
-        </div>
+<div class="card" data-name="whatsapp" onclick="openSite('whatsapp')">
+<div class="icon">💬</div><h3>WhatsApp</h3><p>Messages</p>
+</div>
 
-        <div class="platform" data-name="Messenger"
-        onclick="openPlatform('Messenger')">
-            <div class="icon">💙</div>
-            <h3>Messenger</h3>
-            <p>Chat with friends</p>
-        </div>
+<div class="card" data-name="messenger" onclick="openSite('messenger')">
+<div class="icon">💙</div><h3>Messenger</h3><p>Chat</p>
+</div>
 
-        <div class="platform" data-name="Telegram"
-        onclick="openPlatform('Telegram')">
-            <div class="icon">✈️</div>
-            <h3>Telegram</h3>
-            <p>Messages and channels</p>
-        </div>
+<div class="card" data-name="telegram" onclick="openSite('telegram')">
+<div class="icon">✈️</div><h3>Telegram</h3><p>Messages</p>
+</div>
 
-        <div class="platform" data-name="X"
-        onclick="openPlatform('X')">
-            <div class="icon">𝕏</div>
-            <h3>X</h3>
-            <p>Posts and news</p>
-        </div>
+<div class="card" data-name="x twitter" onclick="openSite('x')">
+<div class="icon">𝕏</div><h3>X</h3><p>Posts and news</p>
+</div>
 
-        <div class="platform" data-name="LinkedIn"
-        onclick="openPlatform('LinkedIn')">
-            <div class="icon">💼</div>
-            <h3>LinkedIn</h3>
-            <p>Professional network</p>
-        </div>
+<div class="card" data-name="linkedin" onclick="openSite('linkedin')">
+<div class="icon">💼</div><h3>LinkedIn</h3><p>Professional</p>
+</div>
 
-        <div class="platform" data-name="Pinterest"
-        onclick="openPlatform('Pinterest')">
-            <div class="icon">📌</div>
-            <h3>Pinterest</h3>
-            <p>Discover inspiration</p>
-        </div>
+<div class="card" data-name="pinterest" onclick="openSite('pinterest')">
+<div class="icon">📌</div><h3>Pinterest</h3><p>Ideas</p>
+</div>
 
-        <div class="platform" data-name="Snapchat"
-        onclick="openPlatform('Snapchat')">
-            <div class="icon">👻</div>
-            <h3>Snapchat</h3>
-            <p>Snaps and stories</p>
-        </div>
+<div class="card" data-name="snapchat" onclick="openSite('snapchat')">
+<div class="icon">👻</div><h3>Snapchat</h3><p>Stories</p>
+</div>
 
-        <div class="platform" data-name="Threads"
-        onclick="openPlatform('Threads')">
-            <div class="icon">🧵</div>
-            <h3>Threads</h3>
-            <p>Conversations</p>
-        </div>
-
-    </div>
-
-    <section class="post-box">
-        <h3>📝 Create a Post</h3>
-
-        <textarea id="postText"
-        placeholder="What would you like to share?"></textarea>
-
-        <h3 style="margin-top:20px;">Choose Platforms</h3>
-
-        <div class="platform-checks">
-
-            <label class="check"><input type="checkbox" value="Facebook"> Facebook</label>
-            <label class="check"><input type="checkbox" value="Instagram"> Instagram</label>
-            <label class="check"><input type="checkbox" value="TikTok"> TikTok</label>
-            <label class="check"><input type="checkbox" value="YouTube"> YouTube</label>
-            <label class="check"><input type="checkbox" value="WhatsApp"> WhatsApp</label>
-            <label class="check"><input type="checkbox" value="Messenger"> Messenger</label>
-            <label class="check"><input type="checkbox" value="Telegram"> Telegram</label>
-            <label class="check"><input type="checkbox" value="X"> X</label>
-            <label class="check"><input type="checkbox" value="LinkedIn"> LinkedIn</label>
-            <label class="check"><input type="checkbox" value="Pinterest"> Pinterest</label>
-            <label class="check"><input type="checkbox" value="Snapchat"> Snapchat</label>
-            <label class="check"><input type="checkbox" value="Threads"> Threads</label>
-
-        </div>
-
-        <button class="action-button" onclick="sharePost()">
-            📤 Share Post
-        </button>
-
-        <p id="status"></p>
-    </section>
+<div class="card" data-name="threads" onclick="openSite('threads')">
+<div class="icon">🧵</div><h3>Threads</h3><p>Conversations</p>
+</div>
 
 </div>
 
-<footer>
-    SocialHub © 2026 | Your Social Media, One Place
-</footer>
+<div class="post">
+
+<h2>📝 Create a Post</h2>
+
+<textarea id="postText" rows="5" placeholder="Write your post here..."></textarea>
+
+<h3>Select platforms</h3>
+
+<div class="checks">
+
+<label class="check"><input type="checkbox" value="facebook">Facebook</label>
+<label class="check"><input type="checkbox" value="instagram">Instagram</label>
+<label class="check"><input type="checkbox" value="tiktok">TikTok</label>
+<label class="check"><input type="checkbox" value="youtube">YouTube</label>
+<label class="check"><input type="checkbox" value="whatsapp">WhatsApp</label>
+<label class="check"><input type="checkbox" value="messenger">Messenger</label>
+<label class="check"><input type="checkbox" value="telegram">Telegram</label>
+<label class="check"><input type="checkbox" value="x">X</label>
+<label class="check"><input type="checkbox" value="linkedin">LinkedIn</label>
+<label class="check"><input type="checkbox" value="pinterest">Pinterest</label>
+<label class="check"><input type="checkbox" value="snapchat">Snapchat</label>
+<label class="check"><input type="checkbox" value="threads">Threads</label>
+
+</div>
+
+<button onclick="copyPost()">📋 Copy Post</button>
+<button onclick="sharePost()">📤 Share Post</button>
+<button class="secondary" onclick="openSelected()">🌐 Open Selected Platforms</button>
+
+<div id="message"></div>
+
+</div>
+
+</div>
+
+<footer>SocialHub © 2026</footer>
 
 <script>
 
-const platforms = {
-    Facebook: "https://www.facebook.com/",
-    Instagram: "https://www.instagram.com/",
-    TikTok: "https://www.tiktok.com/",
-    YouTube: "https://www.youtube.com/",
-    WhatsApp: "https://web.whatsapp.com/",
-    Messenger: "https://www.messenger.com/",
-    Telegram: "https://web.telegram.org/",
-    X: "https://x.com/",
-    LinkedIn: "https://www.linkedin.com/",
-    Pinterest: "https://www.pinterest.com/",
-    Snapchat: "https://www.snapchat.com/",
-    Threads: "https://www.threads.net/"
+const sites={
+facebook:"https://www.facebook.com/",
+instagram:"https://www.instagram.com/",
+tiktok:"https://www.tiktok.com/",
+youtube:"https://www.youtube.com/",
+whatsapp:"https://www.whatsapp.com/",
+messenger:"https://www.messenger.com/",
+telegram:"https://web.telegram.org/",
+x:"https://x.com/",
+linkedin:"https://www.linkedin.com/",
+pinterest:"https://www.pinterest.com/",
+snapchat:"https://www.snapchat.com/",
+threads:"https://www.threads.net/"
 };
 
-function openPlatform(name) {
-    window.open(platforms[name], "_blank");
+function openSite(name){
+ window.open(sites[name],"_blank");
 }
 
-function searchPlatforms() {
-    const input = document.getElementById("searchInput")
-        .value.toLowerCase();
-
-    const cards = document.querySelectorAll(".platform");
-
-    cards.forEach(card => {
-        const name = card.dataset.name.toLowerCase();
-
-        if (name.includes(input)) {
-            card.style.display = "block";
-        } else {
-            card.style.display = "none";
-        }
-    });
+function search(){
+ let value=document.getElementById("search").value.toLowerCase();
+ document.querySelectorAll(".card").forEach(card=>{
+  card.style.display=card.dataset.name.includes(value)?"block":"none";
+ });
 }
 
-function scrollToPlatforms() {
-    document.getElementById("platformTitle")
-        .scrollIntoView({behavior:"smooth"});
+function getText(){
+ return document.getElementById("postText").value.trim();
 }
 
-function sharePost() {
+function copyPost(){
+ let text=getText();
+ let message=document.getElementById("message");
 
-    const text = document.getElementById("postText").value.trim();
+ if(!text){
+  message.innerText="Write something first!";
+  return;
+ }
 
-    const selected = document.querySelectorAll(
-        ".platform-checks input:checked"
-    );
+ if(navigator.clipboard){
+  navigator.clipboard.writeText(text).then(()=>{
+   message.innerText="Post copied successfully! Paste it on your social media.";
+  }).catch(()=>{
+   fallbackCopy(text);
+  });
+ }else{
+  fallbackCopy(text);
+ }
+}
 
-    const status = document.getElementById("status");
+function fallbackCopy(text){
+ let area=document.createElement("textarea");
+ area.value=text;
+ document.body.appendChild(area);
+ area.select();
+ document.execCommand("copy");
+ area.remove();
+ document.getElementById("message").innerText="Post copied! Paste it wherever you want.";
+}
 
-    if (!text) {
-        status.style.color = "#f87171";
-        status.innerText = "Please write something first.";
-        return;
-    }
+async function sharePost(){
+ let text=getText();
 
-    if (selected.length === 0) {
-        status.style.color = "#f87171";
-        status.innerText = "Please select at least one platform.";
-        return;
-    }
+ if(!text){
+  document.getElementById("message").innerText="Write a post first!";
+  return;
+ }
 
-    navigator.clipboard.writeText(text).then(() => {
+ if(navigator.share){
+  try{
+   await navigator.share({text:text});
+   document.getElementById("message").innerText="Share menu opened!";
+  }catch(e){}
+ }else{
+  copyPost();
+ }
+}
 
-        status.style.color = "#86efac";
+function openSelected(){
+ let selected=[...document.querySelectorAll(".checks input:checked")];
 
-        status.innerText =
-        "Your post has been copied! Open your selected platforms and paste your post.";
+ if(selected.length===0){
+  document.getElementById("message").innerText="Select at least one platform.";
+  return;
+ }
 
-        selected.forEach((checkbox, index) => {
+ let text=getText();
 
-            setTimeout(() => {
-                window.open(platforms[checkbox.value], "_blank");
-            }, index * 700);
+ if(text){
+  copyPost();
+ }
 
-        });
+ selected.forEach((checkbox,index)=>{
+  setTimeout(()=>{
+   openSite(checkbox.value);
+  },index*500);
+ });
 
-    }).catch(() => {
-
-        status.style.color = "#facc15";
-
-        status.innerText =
-        "Post prepared. Copy your text and open your selected platforms.";
-
-    });
+ document.getElementById("message").innerText=
+ "Opening selected platforms. Paste your copied post into each platform.";
 }
 
 </script>
 
 </body>
-          </html>
+                         </html>
