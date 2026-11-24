@@ -3,441 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SocialHub</title>
+<title>SocialHub - All Social Media in One Place</title>
 
 <style>
-:root {
-  --bg: #0b1028;
-  --panel: #151b3b;
-  --panel2: #20264b;
-  --blue: #1769f5;
-  --purple: #6427f5;
-  --text: #f7f8ff;
-  --muted: #aab2d0;
-  --border: #30385f;
-}
-
 * {
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
 body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--text);
-  font: 15px/1.45 system-ui, sans-serif;
-}
-
-button, input, textarea {
-  font: inherit;
-}
-
-button {
-  cursor: pointer;
-  border: 0;
+    background: #0b1020;
+    color: white;
 }
 
 header {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: #101633;
-  border-bottom: 1px solid var(--border);
-}
-
-.top {
-  max-width: 1100px;
-  margin: auto;
-  padding: 14px 16px;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 21px;
+    padding: 18px;
+    background: #151c32;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #283452;
 }
 
 .logo {
-  width: 46px;
-  height: 46px;
-  border-radius: 15px;
-  background: linear-gradient(135deg,#3188ff,#7028ef,#d33fbd);
-  display: grid;
-  place-items: center;
-  font-size: 26px;
-  font-weight: 900;
+    font-size: 23px;
+    font-weight: bold;
+    color: #60a5fa;
 }
 
-.brand small {
-  display: block;
-  font-size: 12px;
-  color: var(--muted);
+.logo span {
+    color: white;
 }
 
-.nav {
-  display: flex;
-  gap: 8px;
-  overflow: auto;
-  margin-left: auto;
+.menu {
+    font-size: 24px;
+    cursor: pointer;
 }
 
-.nav button {
-  background: transparent;
-  color: var(--muted);
-  padding: 11px 15px;
-  border-radius: 13px;
-  white-space: nowrap;
-}
-
-.nav button.active,
-.nav button:hover {
-  background: linear-gradient(110deg,#1769f5,#6427f5);
-  color: white;
-}
-
-.wrap {
-  max-width: 1100px;
-  margin: auto;
-  padding: 18px 16px;
-}
-
-.toolbar {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 18px;
-}
-
-.search {
-  flex: 1;
-  min-width: 0;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 28px;
-  padding: 12px 16px;
-  color: white;
-}
-
-.iconbtn {
-  background: var(--panel2);
-  color: white;
-  border-radius: 12px;
-  padding: 10px 12px;
-}
-
-.user {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  background: linear-gradient(135deg,#428aff,#6c43ee);
-  display: grid;
-  place-items: center;
-  font-weight: 700;
+.container {
+    padding: 15px;
+    max-width: 1100px;
+    margin: auto;
 }
 
 .welcome {
-  padding: 20px;
-  border-radius: 22px;
-  background: linear-gradient(110deg,#1469ef,#6325f2);
-  margin-bottom: 18px;
+    padding: 25px;
+    border-radius: 18px;
+    background: linear-gradient(135deg,#4f46e5,#7c3aed,#2563eb);
+    margin-bottom: 20px;
 }
 
-.welcome h2 {
-  margin: 0 0 5px;
-  font-size: 23px;
+.welcome h1 {
+    font-size: 25px;
+    margin-bottom: 10px;
 }
 
 .welcome p {
-  margin: 0;
-  color: #e5e9ff;
+    color: #e0e7ff;
+    font-size: 14px;
 }
 
-.platform-grid {
-  display: grid;
-  grid-template-columns: repeat(6,1fr);
-  gap: 12px;
-  margin: 18px 0;
+.search {
+    margin: 20px 0;
+}
+
+.search input {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background: #1b2540;
+    color: white;
+    font-size: 16px;
+}
+
+.section-title {
+    margin: 20px 0 15px;
+    font-size: 19px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 12px;
 }
 
 .platform {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 13px 7px;
-  text-align: center;
-  color: white;
+    background: #151c32;
+    padding: 20px 10px;
+    border-radius: 15px;
+    text-align: center;
+    border: 1px solid #273452;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 .platform:hover {
-  transform: translateY(-2px);
-  border-color: #7185ff;
+    transform: translateY(-3px);
+    border-color: #60a5fa;
 }
 
-.picon {
-  width: 48px;
-  height: 48px;
-  margin: 0 auto 7px;
-  border-radius: 15px;
-  display: grid;
-  place-items: center;
-  font-size: 24px;
-  font-weight: bold;
-  background: #2568ed;
+.icon {
+    font-size: 35px;
+    margin-bottom: 10px;
 }
 
-.pname {
-  font-size: 13px;
-  font-weight: 600;
+.platform h3 {
+    font-size: 15px;
+    margin-bottom: 5px;
 }
 
-.connected {
-  font-size: 11px;
-  color: #65e5a2;
-  margin-top: 3px;
+.platform p {
+    color: #9ca3af;
+    font-size: 12px;
 }
 
-.columns {
-  display: grid;
-  grid-template-columns: minmax(0,1fr) 290px;
-  gap: 18px;
+button {
+    border: none;
+    cursor: pointer;
 }
 
-.card {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 18px;
-  margin-bottom: 16px;
-  overflow: hidden;
+.action-button {
+    width: 100%;
+    padding: 15px;
+    border-radius: 12px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
-.cardhead {
-  padding: 15px 17px;
-  border-bottom: 1px solid var(--border);
-  font-weight: 750;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.action-button:hover {
+    background: #1d4ed8;
 }
 
-.cardbody {
-  padding: 16px;
+.post-box {
+    background: #151c32;
+    padding: 18px;
+    border-radius: 15px;
+    margin-top: 25px;
+    border: 1px solid #273452;
 }
 
-.composer textarea {
-  width: 100%;
-  min-height: 120px;
-  resize: vertical;
-  background: #20264a;
-  border: 1px solid var(--border);
-  border-radius: 14px;
-  color: white;
-  padding: 14px;
-  outline: none;
+.post-box textarea {
+    width: 100%;
+    background: #0b1020;
+    color: white;
+    padding: 15px;
+    border: 1px solid #273452;
+    border-radius: 10px;
+    resize: vertical;
+    min-height: 120px;
+    outline: none;
 }
 
-.composer textarea:focus {
-  border-color: #7190ff;
+.post-box h3 {
+    margin-bottom: 15px;
 }
 
-.row {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  flex-wrap: wrap;
-  margin-top: 12px;
-}
-
-.btn {
-  padding: 10px 14px;
-  border-radius: 12px;
-  background: var(--panel2);
-  color: white;
-}
-
-.primary {
-  background: linear-gradient(110deg,#1769f5,#6427f5);
-  font-weight: 700;
-}
-
-.selects {
-  display: grid;
-  grid-template-columns: repeat(4,1fr);
-  gap: 8px;
-  margin-top: 12px;
+.platform-checks {
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    gap: 10px;
+    margin-top: 15px;
 }
 
 .check {
-  background: #20264a;
-  border: 1px solid var(--border);
-  border-radius: 11px;
-  padding: 9px;
-  font-size: 13px;
+    background: #202b45;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 13px;
 }
 
 .check input {
-  accent-color: #5e74ff;
+    margin-right: 5px;
 }
 
-.file {
-  display: none;
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #9ca3af;
+    font-size: 13px;
 }
 
-.preview {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-  margin-top: 10px;
+#status {
+    margin-top: 12px;
+    color: #86efac;
+    font-size: 14px;
 }
 
-.preview img,
-.preview video {
-  max-width: 120px;
-  max-height: 120px;
-  border-radius: 12px;
-}
-
-.feedpost {
-  background: #fff;
-  color: #1b2340;
-  border-radius: 15px;
-  margin-bottom: 14px;
-  padding: 15px;
-}
-
-.feedhead {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  font-weight: 700;
-}
-
-.feedpost p {
-  white-space: pre-wrap;
-}
-
-.postactions {
-  display: flex;
-  gap: 8px;
-  border-top: 1px solid #e6e8ef;
-  padding-top: 10px;
-}
-
-.postactions button {
-  background: #eef1f8;
-  color: #26304d;
-  padding: 8px 12px;
-  border-radius: 10px;
-}
-
-.status {
-  font-size: 12px;
-  color: #63e7a5;
-}
-
-.sidebar .cardbody {
-  padding: 12px;
-}
-
-.stat {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 0;
-  color: var(--muted);
-}
-
-.notice {
-  background: #292e52;
-  border-radius: 12px;
-  padding: 12px;
-  color: #dbe2ff;
-  font-size: 13px;
-}
-
-.empty {
-  color: var(--muted);
-  text-align: center;
-  padding: 25px;
-}
-
-.toast {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #242c51;
-  border: 1px solid #6675bc;
-  color: white;
-  padding: 12px 18px;
-  border-radius: 14px;
-  display: none;
-  z-index: 30;
-  box-shadow: 0 8px 30px #0006;
-}
-
-@media(max-width:760px) {
-  .columns {
-    grid-template-columns: 1fr;
-  }
-
-  .sidebar {
+.hidden {
     display: none;
-  }
-
-  .platform-grid {
-    grid-template-columns: repeat(4,1fr);
-  }
-
-  .top {
-    align-items: flex-start;
-    flex-direction: column;
-  }
-
-  .nav {
-    width: 100%;
-    margin: 0;
-  }
-
-  .toolbar {
-    flex-wrap: wrap;
-  }
-
-  .search {
-    flex-basis: 100%;
-  }
-
-  .selects {
-    grid-template-columns: repeat(2,1fr);
-  }
-}
-
-@media(max-width:420px) {
-  .platform-grid {
-    gap: 7px;
-  }
-
-  .platform {
-    padding: 10px 4px;
-  }
-
-  .picon {
-    width: 43px;
-    height: 43px;
-  }
-
-  .welcome h2 {
-    font-size: 20px;
-  }
 }
 </style>
 </head>
@@ -445,459 +204,243 @@ header {
 <body>
 
 <header>
-<div class="top">
-
-<div class="brand">
-<div class="logo">S</div>
-<div>
-SocialHub
-<small>All Social Media in One</small>
-</div>
-</div>
-
-<nav class="nav" id="nav">
-<button class="active" data-view="home">⌂ Home</button>
-<button data-view="Facebook">🔵 Facebook</button>
-<button data-view="Instagram">📸 Instagram</button>
-<button data-view="TikTok">♪ TikTok</button>
-<button data-view="YouTube">▶ YouTube</button>
-<button data-view="Watch">▶ Watch</button>
-</nav>
-
-</div>
+    <div class="logo">Social<span>Hub</span> 🌐</div>
+    <div class="menu" onclick="scrollToPlatforms()">☰</div>
 </header>
 
-<main class="wrap">
+<div class="container">
 
-<div class="toolbar">
+    <section class="welcome">
+        <h1>Welcome to SocialHub 🚀</h1>
+        <p>Your social media platforms, all in one place.</p>
+        <p style="margin-top:15px;">Access your favorite social networks with one click.</p>
+    </section>
 
-<input class="search" id="search"
-placeholder="🔎 Search posts, videos, people...">
+    <div class="search">
+        <input type="text" id="searchInput"
+        placeholder="🔍 Search social platforms..."
+        oninput="searchPlatforms()">
+    </div>
 
-<button class="iconbtn" id="bell">🔔 <span id="bellcount">3</span></button>
+    <h2 class="section-title" id="platformTitle">🌐 Your Platforms</h2>
 
-<div class="user">
-<div class="avatar">SK</div>
-<div>
-<b>Solomon K.</b>
-<div class="status">● Online</div>
+    <div class="grid" id="platformGrid">
+
+        <div class="platform" data-name="Facebook"
+        onclick="openPlatform('Facebook')">
+            <div class="icon">📘</div>
+            <h3>Facebook</h3>
+            <p>Connect with friends</p>
+        </div>
+
+        <div class="platform" data-name="Instagram"
+        onclick="openPlatform('Instagram')">
+            <div class="icon">📸</div>
+            <h3>Instagram</h3>
+            <p>Photos and reels</p>
+        </div>
+
+        <div class="platform" data-name="TikTok"
+        onclick="openPlatform('TikTok')">
+            <div class="icon">🎵</div>
+            <h3>TikTok</h3>
+            <p>Videos and trends</p>
+        </div>
+
+        <div class="platform" data-name="YouTube"
+        onclick="openPlatform('YouTube')">
+            <div class="icon">▶️</div>
+            <h3>YouTube</h3>
+            <p>Watch and upload videos</p>
+        </div>
+
+        <div class="platform" data-name="WhatsApp"
+        onclick="openPlatform('WhatsApp')">
+            <div class="icon">💬</div>
+            <h3>WhatsApp</h3>
+            <p>Messages and calls</p>
+        </div>
+
+        <div class="platform" data-name="Messenger"
+        onclick="openPlatform('Messenger')">
+            <div class="icon">💙</div>
+            <h3>Messenger</h3>
+            <p>Chat with friends</p>
+        </div>
+
+        <div class="platform" data-name="Telegram"
+        onclick="openPlatform('Telegram')">
+            <div class="icon">✈️</div>
+            <h3>Telegram</h3>
+            <p>Messages and channels</p>
+        </div>
+
+        <div class="platform" data-name="X"
+        onclick="openPlatform('X')">
+            <div class="icon">𝕏</div>
+            <h3>X</h3>
+            <p>Posts and news</p>
+        </div>
+
+        <div class="platform" data-name="LinkedIn"
+        onclick="openPlatform('LinkedIn')">
+            <div class="icon">💼</div>
+            <h3>LinkedIn</h3>
+            <p>Professional network</p>
+        </div>
+
+        <div class="platform" data-name="Pinterest"
+        onclick="openPlatform('Pinterest')">
+            <div class="icon">📌</div>
+            <h3>Pinterest</h3>
+            <p>Discover inspiration</p>
+        </div>
+
+        <div class="platform" data-name="Snapchat"
+        onclick="openPlatform('Snapchat')">
+            <div class="icon">👻</div>
+            <h3>Snapchat</h3>
+            <p>Snaps and stories</p>
+        </div>
+
+        <div class="platform" data-name="Threads"
+        onclick="openPlatform('Threads')">
+            <div class="icon">🧵</div>
+            <h3>Threads</h3>
+            <p>Conversations</p>
+        </div>
+
+    </div>
+
+    <section class="post-box">
+        <h3>📝 Create a Post</h3>
+
+        <textarea id="postText"
+        placeholder="What would you like to share?"></textarea>
+
+        <h3 style="margin-top:20px;">Choose Platforms</h3>
+
+        <div class="platform-checks">
+
+            <label class="check"><input type="checkbox" value="Facebook"> Facebook</label>
+            <label class="check"><input type="checkbox" value="Instagram"> Instagram</label>
+            <label class="check"><input type="checkbox" value="TikTok"> TikTok</label>
+            <label class="check"><input type="checkbox" value="YouTube"> YouTube</label>
+            <label class="check"><input type="checkbox" value="WhatsApp"> WhatsApp</label>
+            <label class="check"><input type="checkbox" value="Messenger"> Messenger</label>
+            <label class="check"><input type="checkbox" value="Telegram"> Telegram</label>
+            <label class="check"><input type="checkbox" value="X"> X</label>
+            <label class="check"><input type="checkbox" value="LinkedIn"> LinkedIn</label>
+            <label class="check"><input type="checkbox" value="Pinterest"> Pinterest</label>
+            <label class="check"><input type="checkbox" value="Snapchat"> Snapchat</label>
+            <label class="check"><input type="checkbox" value="Threads"> Threads</label>
+
+        </div>
+
+        <button class="action-button" onclick="sharePost()">
+            📤 Share Post
+        </button>
+
+        <p id="status"></p>
+    </section>
+
 </div>
-<button class="iconbtn" id="profile">⌄</button>
-</div>
 
-</div>
-
-<section class="welcome">
-<h2>👋 Welcome to SocialHub!</h2>
-<p>Manage, watch and share across all your social media accounts.</p>
-</section>
-
-<div class="platform-grid" id="platforms"></div>
-
-<div class="columns">
-
-<div>
-
-<section class="card composer">
-
-<div class="cardhead">
-✍️ Create a post
-<span id="postcount" class="status">0 posts</span>
-</div>
-
-<div class="cardbody">
-
-<textarea id="posttext"
-placeholder="What's on your mind? Write once and choose where to share..."></textarea>
-
-<div class="row">
-
-<label class="btn" for="media">🖼️ Photo / video</label>
-<input type="file" class="file" id="media" accept="image/*,video/*" multiple>
-
-<button class="btn" id="emoji">😊 Emoji</button>
-<button class="btn" id="clear">Clear</button>
-
-</div>
-
-<div class="preview" id="preview"></div>
-
-<div style="margin-top:14px;font-weight:700">
-Choose platforms
-</div>
-
-<div class="selects" id="checks"></div>
-
-<div class="row">
-<button class="btn" id="selectall">Select all</button>
-<button class="btn" id="selectnone">Clear selection</button>
-<button class="btn primary" id="publish">🚀 Publish post</button>
-</div>
-
-<div class="notice" style="margin-top:12px">
-Demo mode: posts appear in your SocialHub feed. Real publishing requires official platform authorization and API access.
-Never enter your social media passwords here.
-</div>
-
-</div>
-</section>
-
-<section class="card">
-
-<div class="cardhead">
-<span id="feedtitle">📰 Your SocialHub feed</span>
-<button class="btn" id="refresh">↻ Refresh</button>
-</div>
-
-<div class="cardbody" id="feed"></div>
-
-</section>
-
-</div>
-
-<aside class="sidebar">
-
-<div class="card">
-<div class="cardhead">📊 Your overview</div>
-
-<div class="cardbody">
-<div class="stat"><span>Posts created</span><b id="statposts">0</b></div>
-<div class="stat"><span>Connected accounts</span><b id="statconnected">0</b></div>
-<div class="stat"><span>Selected platforms</span><b id="statselected">0</b></div>
-</div>
-</div>
-
-<div class="card">
-<div class="cardhead">🔗 Account connections</div>
-<div class="cardbody" id="connections"></div>
-</div>
-
-<div class="notice">
-Connect buttons open platform websites. Secure account linking requires official OAuth/API integration.
-</div>
-
-</aside>
-
-</div>
-</main>
-
-<div class="toast" id="toast"></div>
+<footer>
+    SocialHub © 2026 | Your Social Media, One Place
+</footer>
 
 <script>
 
-const platforms = [
-{name:'Facebook',icon:'f',color:'#1877f2'},
-{name:'Instagram',icon:'◎',color:'linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)'},
-{name:'TikTok',icon:'♪',color:'#050505'},
-{name:'YouTube',icon:'▶',color:'#ff0000'},
-{name:'WhatsApp',icon:'◉',color:'#18bd66'},
-{name:'Messenger',icon:'ϟ',color:'#1685fa'},
-{name:'X',icon:'𝕏',color:'#000'},
-{name:'LinkedIn',icon:'in',color:'#0a66c2'},
-{name:'Telegram',icon:'➤',color:'#26a5e4'},
-{name:'Threads',icon:'@',color:'#101010'},
-{name:'Pinterest',icon:'P',color:'#bd081c'},
-{name:'Snapchat',icon:'♟',color:'#ffeb00'}
-];
-
-let posts = [];
-let connected = new Set();
-let selected = new Set(['Facebook']);
-let mediaFiles = [];
-
-const $ = id => document.getElementById(id);
-
-function toast(msg) {
-  let t = $('toast');
-  t.textContent = msg;
-  t.style.display = 'block';
-
-  clearTimeout(window.toastTimer);
-
-  window.toastTimer = setTimeout(() => {
-    t.style.display = 'none';
-  }, 2600);
-}
-
-function renderPlatforms() {
-
-  $('platforms').innerHTML = platforms.map(p => `
-    <button class="platform" data-platform="${p.name}">
-      <div class="picon" style="background:${p.color}">${p.icon}</div>
-      <div class="pname">${p.name}</div>
-      <div class="connected">
-        ${connected.has(p.name) ? '✓ Connected' : 'Tap to open'}
-      </div>
-    </button>
-  `).join('');
-
-  $('platforms').querySelectorAll('[data-platform]').forEach(b => {
-    b.onclick = () => platformAction(b.dataset.platform);
-  });
-}
-
-function renderChecks() {
-
-  $('checks').innerHTML = platforms.map(p => `
-    <label class="check">
-      <input type="checkbox" value="${p.name}"
-      ${selected.has(p.name) ? 'checked' : ''}>
-      ${p.name}
-    </label>
-  `).join('');
-
-  $('checks').querySelectorAll('input').forEach(c => {
-    c.onchange = () => {
-      c.checked ? selected.add(c.value) : selected.delete(c.value);
-      stats();
-    };
-  });
-
-  stats();
-}
-
-function renderConnections() {
-
-  $('connections').innerHTML = platforms.map(p => `
-    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0">
-      <span>${p.icon} ${p.name}</span>
-      <button class="btn" style="padding:6px 9px;font-size:12px"
-      data-connect="${p.name}">
-        ${connected.has(p.name) ? 'Connected' : 'Connect'}
-      </button>
-    </div>
-  `).join('');
-
-  $('connections').querySelectorAll('[data-connect]').forEach(b => {
-    b.onclick = () => connect(b.dataset.connect);
-  });
-}
-
-function connect(name) {
-
-  connected.add(name);
-
-  renderPlatforms();
-  renderConnections();
-  stats();
-
-  toast(name + ' marked connected in demo mode.');
-}
-
-function platformAction(name) {
-
-  if(name === 'Watch') {
-    showView('Watch');
-    return;
-  }
-
-  connect(name);
-  showView(name);
-}
-
-function showView(view) {
-
-  document.querySelectorAll('#nav button').forEach(b => {
-    b.classList.toggle('active', b.dataset.view === view);
-  });
-
-  $('feedtitle').textContent =
-    view === 'home'
-    ? '📰 Your SocialHub feed'
-    : view === 'Watch'
-    ? '▶ Watch videos'
-    : '🌐 ' + view + ' dashboard';
-
-  toast(view + ' selected. Create posts using the composer.');
-}
-
-function stats() {
-
-  $('statposts').textContent = posts.length;
-  $('statconnected').textContent = connected.size;
-  $('statselected').textContent = selected.size;
-  $('postcount').textContent = posts.length + ' posts';
-}
-
-function renderFeed(filter = '') {
-
-  let list = posts.filter(p =>
-    !filter || p.text.toLowerCase().includes(filter.toLowerCase())
-  );
-
-  if(!list.length) {
-    $('feed').innerHTML =
-      '<div class="empty">No posts yet. Create your first post above ✨</div>';
-    return;
-  }
-
-  $('feed').innerHTML = list.slice().reverse().map(p => `
-    <article class="feedpost">
-
-      <div class="feedhead">
-        <div class="avatar">SK</div>
-        <div>
-          Solomon K.
-          <small style="display:block;color:#77809b;font-weight:400">
-            ${p.time} · SocialHub
-          </small>
-        </div>
-      </div>
-
-      <p>${escapeHtml(p.text)}</p>
-
-      ${p.media.map(m =>
-        m.type.startsWith('image')
-        ? `<img src="${m.url}" style="max-width:100%;max-height:360px;border-radius:12px;margin:5px 0">`
-        : `<video controls src="${m.url}" style="max-width:100%;max-height:360px;border-radius:12px;margin:5px 0"></video>`
-      ).join('')}
-
-      <small>Shared to: ${p.platforms.join(', ')}</small>
-
-      <div class="postactions">
-        <button onclick="likePost(${p.id})">👍 Like <span>${p.likes}</span></button>
-        <button onclick="toast('Comments are demo-only')">💬 Comment</button>
-        <button onclick="sharePost(${p.id})">↗ Share</button>
-      </div>
-
-    </article>
-  `).join('');
-}
-
-function escapeHtml(s) {
-
-  return s.replace(/[&<>"']/g, c => ({
-    '&':'&amp;',
-    '<':'&lt;',
-    '>':'&gt;',
-    '"':'&quot;',
-    "'":'&#39;'
-  }[c]));
-}
-
-window.likePost = id => {
-
-  let p = posts.find(p => p.id === id);
-
-  p.likes++;
-
-  renderFeed($('search').value);
+const platforms = {
+    Facebook: "https://www.facebook.com/",
+    Instagram: "https://www.instagram.com/",
+    TikTok: "https://www.tiktok.com/",
+    YouTube: "https://www.youtube.com/",
+    WhatsApp: "https://web.whatsapp.com/",
+    Messenger: "https://www.messenger.com/",
+    Telegram: "https://web.telegram.org/",
+    X: "https://x.com/",
+    LinkedIn: "https://www.linkedin.com/",
+    Pinterest: "https://www.pinterest.com/",
+    Snapchat: "https://www.snapchat.com/",
+    Threads: "https://www.threads.net/"
 };
 
-window.sharePost = id => {
+function openPlatform(name) {
+    window.open(platforms[name], "_blank");
+}
 
-  let p = posts.find(p => p.id === id);
+function searchPlatforms() {
+    const input = document.getElementById("searchInput")
+        .value.toLowerCase();
 
-  if(navigator.share) {
-    navigator.share({text:p.text}).catch(()=>{});
-  } else {
-    navigator.clipboard?.writeText(p.text);
-    toast('Post text copied');
-  }
-};
+    const cards = document.querySelectorAll(".platform");
 
-$('publish').onclick = () => {
+    cards.forEach(card => {
+        const name = card.dataset.name.toLowerCase();
 
-  let text = $('posttext').value.trim();
+        if (name.includes(input)) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+}
 
-  if(!text && !mediaFiles.length) {
-    toast('Write something or attach media first');
-    return;
-  }
+function scrollToPlatforms() {
+    document.getElementById("platformTitle")
+        .scrollIntoView({behavior:"smooth"});
+}
 
-  if(!selected.size) {
-    toast('Select at least one platform');
-    return;
-  }
+function sharePost() {
 
-  posts.push({
-    id: Date.now(),
-    text,
-    platforms: [...selected],
-    time: 'Just now',
-    likes: 0,
-    media: mediaFiles.map(m => ({
-      type: m.type,
-      url: m.url
-    }))
-  });
+    const text = document.getElementById("postText").value.trim();
 
-  $('posttext').value = '';
-  mediaFiles = [];
-  $('preview').innerHTML = '';
-  $('media').value = '';
+    const selected = document.querySelectorAll(
+        ".platform-checks input:checked"
+    );
 
-  renderFeed($('search').value);
-  stats();
+    const status = document.getElementById("status");
 
-  toast('Post published to your SocialHub demo feed!');
-};
+    if (!text) {
+        status.style.color = "#f87171";
+        status.innerText = "Please write something first.";
+        return;
+    }
 
-$('media').onchange = e => {
+    if (selected.length === 0) {
+        status.style.color = "#f87171";
+        status.innerText = "Please select at least one platform.";
+        return;
+    }
 
-  mediaFiles = Array.from(e.target.files).map(f => ({
-    type: f.type,
-    url: URL.createObjectURL(f)
-  }));
+    navigator.clipboard.writeText(text).then(() => {
 
-  $('preview').innerHTML = mediaFiles.map(m =>
-    m.type.startsWith('image')
-    ? `<img src="${m.url}">`
-    : `<video controls src="${m.url}"></video>`
-  ).join('');
-};
+        status.style.color = "#86efac";
 
-$('clear').onclick = () => {
+        status.innerText =
+        "Your post has been copied! Open your selected platforms and paste your post.";
 
-  $('posttext').value = '';
-  mediaFiles = [];
-  $('preview').innerHTML = '';
-  $('media').value = '';
+        selected.forEach((checkbox, index) => {
 
-  toast('Composer cleared');
-};
+            setTimeout(() => {
+                window.open(platforms[checkbox.value], "_blank");
+            }, index * 700);
 
-$('emoji').onclick = () => {
+        });
 
-  $('posttext').value += ' 😊';
-  $('posttext').focus();
-};
+    }).catch(() => {
 
-$('selectall').onclick = () => {
+        status.style.color = "#facc15";
 
-  selected = new Set(platforms.map(p => p.name));
-  renderChecks();
-};
+        status.innerText =
+        "Post prepared. Copy your text and open your selected platforms.";
 
-$('selectnone').onclick = () => {
-
-  selected.clear();
-  renderChecks();
-};
-
-$('search').oninput = () => renderFeed($('search').value);
-
-$('refresh').onclick = () => {
-
-  renderFeed($('search').value);
-  toast('Feed refreshed');
-};
-
-$('bell').onclick = () => toast('You have 3 demo notifications');
-
-$('profile').onclick = () => toast('Profile menu coming next');
-
-$('nav').querySelectorAll('button').forEach(b => {
-  b.onclick = () => showView(b.dataset.view);
-});
-
-renderPlatforms();
-renderChecks();
-renderConnections();
-renderFeed();
-stats();
+    });
+}
 
 </script>
 
 </body>
-  </html>
+          </html>
