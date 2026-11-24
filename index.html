@@ -3,961 +3,452 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>SocialHub — All Social Media in One</title>
+<title>SocialHub</title>
 
 <style>
 :root {
---bg:#0b0d24;
---panel:#151832;
---panel2:#1c2043;
---line:#30345d;
---purple:#6037ff;
---blue:#1479ff;
---text:#f6f7ff;
---muted:#a6abc9;
---green:#13c66b;
+  --bg: #0b1028;
+  --panel: #151b3b;
+  --panel2: #20264b;
+  --blue: #1769f5;
+  --purple: #6427f5;
+  --text: #f7f8ff;
+  --muted: #aab2d0;
+  --border: #30385f;
 }
 
 * {
-box-sizing:border-box;
+  box-sizing: border-box;
 }
 
 body {
-margin:0;
-background:linear-gradient(135deg,#0b0d24,#111536 65%,#0a1026);
-color:var(--text);
-font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 15px/1.45 system-ui, sans-serif;
 }
 
-button,input,textarea {
-font:inherit;
+button, input, textarea {
+  font: inherit;
 }
 
 button {
-cursor:pointer;
-color:inherit;
-border:0;
+  cursor: pointer;
+  border: 0;
 }
 
-.app {
-min-height:100vh;
-display:grid;
-grid-template-columns:250px minmax(0,1fr);
+header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: #101633;
+  border-bottom: 1px solid var(--border);
 }
 
-.sidebar {
-border-right:1px solid var(--line);
-padding:20px 14px;
-background:#10132d;
-position:sticky;
-top:0;
-height:100vh;
-overflow:auto;
+.top {
+  max-width: 1100px;
+  margin: auto;
+  padding: 14px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
 .brand {
-display:flex;
-align-items:center;
-gap:10px;
-padding:0 10px 20px;
-font-size:24px;
-font-weight:900;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 800;
+  font-size: 21px;
 }
 
-.brandmark {
-width:42px;
-height:42px;
-border-radius:15px;
-background:linear-gradient(145deg,#00c4ff,#7337ff 55%,#ff4aa4);
-display:grid;
-place-items:center;
-font-size:29px;
-font-weight:900;
-color:white;
-transform:rotate(-8deg);
+.logo {
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
+  background: linear-gradient(135deg,#3188ff,#7028ef,#d33fbd);
+  display: grid;
+  place-items: center;
+  font-size: 26px;
+  font-weight: 900;
 }
 
 .brand small {
-display:block;
-font-size:11px;
-color:#c5c8df;
-font-weight:500;
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
 }
 
 .nav {
-display:grid;
-gap:5px;
+  display: flex;
+  gap: 8px;
+  overflow: auto;
+  margin-left: auto;
 }
 
 .nav button {
-background:transparent;
-border-radius:11px;
-text-align:left;
-padding:10px 12px;
-color:#dfe2f7;
-display:flex;
-align-items:center;
-gap:12px;
-font-size:14px;
+  background: transparent;
+  color: var(--muted);
+  padding: 11px 15px;
+  border-radius: 13px;
+  white-space: nowrap;
 }
 
+.nav button.active,
 .nav button:hover {
-background:#22264d;
+  background: linear-gradient(110deg,#1769f5,#6427f5);
+  color: white;
 }
 
-.nav button.active {
-background:linear-gradient(100deg,#6235ff,#344bff);
-color:#fff;
-font-weight:700;
+.wrap {
+  max-width: 1100px;
+  margin: auto;
+  padding: 18px 16px;
 }
 
-.nav .ico {
-width:25px;
-text-align:center;
-font-size:20px;
-}
-
-.nav .divider {
-height:1px;
-background:#373a60;
-margin:10px 3px;
-}
-
-.main {
-padding:15px 18px 25px;
-min-width:0;
-}
-
-.topbar {
-display:flex;
-align-items:center;
-gap:14px;
-margin-bottom:14px;
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
 }
 
 .search {
-flex:1;
-display:flex;
-align-items:center;
-gap:10px;
-background:#1b1e42;
-border:1px solid #2e3260;
-border-radius:28px;
-padding:12px 18px;
-color:#b9bed9;
+  flex: 1;
+  min-width: 0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 28px;
+  padding: 12px 16px;
+  color: white;
 }
 
-.search input {
-background:transparent;
-border:0;
-outline:0;
-color:white;
-width:100%;
-}
-
-.top-actions {
-display:flex;
-align-items:center;
-gap:15px;
-}
-
-.bell {
-font-size:21px;
-position:relative;
-}
-
-.badge {
-position:absolute;
-top:-7px;
-right:-9px;
-background:#f21d45;
-border-radius:20px;
-font-size:10px;
-padding:2px 5px;
+.iconbtn {
+  background: var(--panel2);
+  color: white;
+  border-radius: 12px;
+  padding: 10px 12px;
 }
 
 .user {
-display:flex;
-align-items:center;
-gap:9px;
-font-size:13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .avatar {
-width:38px;
-height:38px;
-border-radius:50%;
-background:linear-gradient(135deg,#5bc0ff,#7243ff);
-display:grid;
-place-items:center;
-font-weight:800;
-border:2px solid #414674;
-}
-
-.online {
-font-size:11px;
-color:#b7c0d9;
-}
-
-.online:before {
-content:"";
-display:inline-block;
-width:8px;
-height:8px;
-border-radius:50%;
-background:#12ca67;
-margin-right:5px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: linear-gradient(135deg,#428aff,#6c43ee);
+  display: grid;
+  place-items: center;
+  font-weight: 700;
 }
 
 .welcome {
-border-radius:15px;
-padding:18px 20px;
-background:linear-gradient(110deg,#5934f7,#1378ff 58%,#5b18e9);
-display:flex;
-justify-content:space-between;
-align-items:center;
-gap:15px;
-margin-bottom:14px;
+  padding: 20px;
+  border-radius: 22px;
+  background: linear-gradient(110deg,#1469ef,#6325f2);
+  margin-bottom: 18px;
 }
 
-.welcome h1 {
-font-size:23px;
-margin:0 0 4px;
+.welcome h2 {
+  margin: 0 0 5px;
+  font-size: 23px;
 }
 
 .welcome p {
-margin:0;
-color:#f0f2ff;
-font-size:14px;
+  margin: 0;
+  color: #e5e9ff;
 }
 
-.pro {
-background:#241b68;
-border-radius:50px;
-padding:10px 14px;
-display:flex;
-align-items:center;
-gap:12px;
-white-space:nowrap;
-font-size:12px;
-}
-
-.pro button {
-background:#ffd31a;
-color:#19142a;
-border-radius:25px;
-padding:9px 17px;
-font-weight:800;
-}
-
-.platforms {
-display:grid;
-grid-template-columns:repeat(12,minmax(55px,1fr));
-gap:6px;
-margin:12px 0 15px;
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(6,1fr);
+  gap: 12px;
+  margin: 18px 0;
 }
 
 .platform {
-border:0;
-background:transparent;
-text-align:center;
-padding:4px 1px;
-border-radius:12px;
-min-width:0;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 13px 7px;
+  text-align: center;
+  color: white;
 }
 
 .platform:hover {
-background:#252953;
+  transform: translateY(-2px);
+  border-color: #7185ff;
 }
 
 .picon {
-width:52px;
-height:52px;
-border-radius:15px;
-margin:auto auto 5px;
-display:grid;
-place-items:center;
-font-size:27px;
-font-weight:900;
-color:white;
-box-shadow:0 5px 12px #0003;
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 7px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 24px;
+  font-weight: bold;
+  background: #2568ed;
 }
 
-.platform span {
-display:block;
-font-size:11px;
-font-weight:700;
-white-space:nowrap;
-overflow:hidden;
-text-overflow:ellipsis;
-}
-
-.facebook {background:#1877f2;}
-.instagram {background:linear-gradient(45deg,#ffd43b,#ff315c,#893aff);}
-.tiktok {background:#080808;}
-.youtube {background:#f00;}
-.whatsapp {background:#19c969;}
-.messenger {background:#1685ff;}
-.x {background:#000;}
-.linkedin {background:#0877b9;}
-.telegram {background:#22a8e7;}
-.threads {background:#111;}
-.pinterest {background:#bd092d;}
-.snapchat {background:#ffeb00;color:#111;}
-
-.content-grid {
-display:grid;
-grid-template-columns:minmax(0,1.8fr) minmax(300px,.9fr);
-gap:12px;
-}
-
-.feed-card,.side-card,.video-card,.analytics {
-border:1px solid #30345d;
-background:#171b3b;
-border-radius:15px;
-overflow:hidden;
-}
-
-.feed-head {
-background:linear-gradient(100deg,#0864f5,#0844d6);
-padding:12px 15px;
-display:flex;
-align-items:center;
-gap:12px;
-}
-
-.feed-head strong {
-font-size:16px;
-}
-
-.feed-tabs {
-margin-left:auto;
-display:flex;
-gap:13px;
-font-size:12px;
-}
-
-.feed-tabs button {
-background:transparent;
-padding:6px 2px;
-color:#e8edff;
-}
-
-.feed-tabs button.active {
-border-bottom:2px solid white;
-font-weight:800;
-}
-
-.feed-body {
-display:grid;
-grid-template-columns:190px minmax(0,1fr);
-background:#f4f5fb;
-color:#171936;
-min-height:440px;
-}
-
-.feed-menu {
-padding:14px 13px;
-border-right:1px solid #e2e4ef;
-}
-
-.profile-mini {
-display:flex;
-align-items:center;
-gap:9px;
-font-weight:800;
-font-size:12px;
-margin-bottom:14px;
-}
-
-.feed-menu button {
-display:flex;
-align-items:center;
-gap:10px;
-width:100%;
-padding:9px 6px;
-background:transparent;
-color:#272b50;
-text-align:left;
-font-size:12px;
-border-radius:8px;
-}
-
-.feed-menu button:hover {
-background:#e7eaff;
-}
-
-.feed-main {
-padding:12px;
-min-width:0;
-}
-
-.postbox {
-background:white;
-border:1px solid #e1e4f0;
-border-radius:12px;
-padding:10px;
-margin-bottom:10px;
-}
-
-.postbox-top {
-display:flex;
-gap:9px;
-align-items:center;
-}
-
-.postbox input {
-border:0;
-background:#f0f2fa;
-border-radius:22px;
-padding:11px 14px;
-width:100%;
-outline:0;
-color:#222;
-}
-
-.post-actions {
-display:flex;
-justify-content:space-around;
-padding-top:9px;
-margin-top:8px;
-border-top:1px solid #eee;
-font-size:12px;
-}
-
-.post-actions button {
-background:transparent;
-color:#292e56;
-}
-
-.post {
-background:white;
-border:1px solid #e1e4f0;
-border-radius:12px;
-overflow:hidden;
-margin-bottom:10px;
-}
-
-.post-title {
-display:flex;
-align-items:center;
-gap:9px;
-padding:10px 12px;
-font-size:12px;
-}
-
-.post-title small {
-display:block;
-color:#727792;
-margin-top:2px;
-}
-
-.post-text {
-padding:0 12px 9px;
-font-size:13px;
-}
-
-.post-image {
-width:100%;
-height:185px;
-object-fit:cover;
-background:linear-gradient(180deg,#ffcf70,#f16d37 50%,#192c39);
-display:block;
-}
-
-.post-image.sunset {
-background:linear-gradient(180deg,#ffc56a 0%,#ff6c38 42%,#202c31 80%);
-}
-
-.post-image.sunset:after {
-content:"🌅";
-font-size:80px;
-display:grid;
-place-items:center;
-height:100%;
-text-shadow:0 5px 25px #0005;
-}
-
-.post-stats {
-padding:8px 12px;
-font-size:11px;
-color:#777c96;
-border-bottom:1px solid #eee;
-display:flex;
-justify-content:space-between;
-}
-
-.post-buttons {
-display:flex;
-justify-content:space-around;
-padding:8px;
-font-size:12px;
-}
-
-.post-buttons button {
-background:transparent;
-color:#373c62;
-}
-
-.rightcol {
-display:grid;
-gap:11px;
-align-content:start;
-}
-
-.side-card {
-padding:0;
-}
-
-.side-title {
-padding:13px 14px;
-background:linear-gradient(110deg,#5424d9,#32205f);
-font-weight:800;
-display:flex;
-align-items:center;
-gap:9px;
-}
-
-.composer {
-padding:12px;
-background:#f7f8ff;
-color:#202348;
-}
-
-.composer textarea {
-width:100%;
-min-height:75px;
-border:1px solid #e0e3f3;
-border-radius:10px;
-padding:11px;
-resize:vertical;
-outline:0;
-}
-
-.media-buttons {
-display:flex;
-gap:6px;
-margin:8px 0;
-}
-
-.media-buttons button {
-flex:1;
-background:#fff;
-border:1px solid #e7e9f4;
-color:#282c50;
-border-radius:9px;
-padding:8px;
-font-size:11px;
-}
-
-.select-row {
-display:flex;
-justify-content:space-between;
-font-weight:800;
-font-size:12px;
-margin:10px 0;
-}
-
-.select-row button {
-background:transparent;
-color:#3325b9;
-font-size:12px;
-}
-
-.account-picks {
-display:grid;
-grid-template-columns:repeat(6,1fr);
-gap:5px;
-margin-bottom:10px;
-}
-
-.pick {
-position:relative;
-background:transparent;
-padding:2px;
-}
-
-.pick .picon {
-width:34px;
-height:34px;
-border-radius:50%;
-font-size:18px;
-}
-
-.pick .check {
-position:absolute;
-right:0;
-bottom:0;
-background:#2462ef;
-border:2px solid white;
-color:white;
-border-radius:50%;
-width:15px;
-height:15px;
-font-size:9px;
-display:grid;
-place-items:center;
-}
-
-.pick:not(.checked) .check {
-display:none;
-}
-
-.publish {
-width:100%;
-background:linear-gradient(90deg,#6530f3,#4231e7);
-border-radius:10px;
-padding:11px;
-color:white;
-font-weight:800;
-font-size:12px;
+.pname {
+  font-size: 13px;
+  font-weight: 600;
 }
 
 .connected {
-padding:12px;
+  font-size: 11px;
+  color: #65e5a2;
+  margin-top: 3px;
 }
 
-.connected-head {
-display:flex;
-justify-content:space-between;
-font-size:13px;
-font-weight:800;
-margin-bottom:10px;
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 290px;
+  gap: 18px;
 }
 
-.connected-head button {
-color:#16d16d;
-background:transparent;
-font-size:11px;
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  margin-bottom: 16px;
+  overflow: hidden;
 }
 
-.connected-grid {
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:10px;
+.cardhead {
+  padding: 15px 17px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 750;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.conn {
-text-align:center;
-font-size:10px;
+.cardbody {
+  padding: 16px;
 }
 
-.conn .picon {
-width:43px;
-height:43px;
-border-radius:50%;
-margin-bottom:3px;
+.composer textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  background: #20264a;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  color: white;
+  padding: 14px;
+  outline: none;
+}
+
+.composer textarea:focus {
+  border-color: #7190ff;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.btn {
+  padding: 10px 14px;
+  border-radius: 12px;
+  background: var(--panel2);
+  color: white;
+}
+
+.primary {
+  background: linear-gradient(110deg,#1769f5,#6427f5);
+  font-weight: 700;
+}
+
+.selects {
+  display: grid;
+  grid-template-columns: repeat(4,1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.check {
+  background: #20264a;
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  padding: 9px;
+  font-size: 13px;
+}
+
+.check input {
+  accent-color: #5e74ff;
+}
+
+.file {
+  display: none;
+}
+
+.preview {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+.preview img,
+.preview video {
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 12px;
+}
+
+.feedpost {
+  background: #fff;
+  color: #1b2340;
+  border-radius: 15px;
+  margin-bottom: 14px;
+  padding: 15px;
+}
+
+.feedhead {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 700;
+}
+
+.feedpost p {
+  white-space: pre-wrap;
+}
+
+.postactions {
+  display: flex;
+  gap: 8px;
+  border-top: 1px solid #e6e8ef;
+  padding-top: 10px;
+}
+
+.postactions button {
+  background: #eef1f8;
+  color: #26304d;
+  padding: 8px 12px;
+  border-radius: 10px;
 }
 
 .status {
-display:inline-block;
-background:#0abf5e;
-color:#fff;
-border-radius:15px;
-padding:3px 8px;
-font-size:9px;
-font-weight:800;
+  font-size: 12px;
+  color: #63e7a5;
 }
 
-.bottom-grid {
-display:grid;
-grid-template-columns:minmax(0,1.5fr) minmax(300px,1fr);
-gap:12px;
-margin-top:11px;
+.sidebar .cardbody {
+  padding: 12px;
 }
 
-.video-card,.analytics {
-padding:12px;
+.stat {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  color: var(--muted);
 }
 
-.section-head {
-display:flex;
-align-items:center;
-justify-content:space-between;
-font-size:14px;
-font-weight:800;
-margin-bottom:10px;
+.notice {
+  background: #292e52;
+  border-radius: 12px;
+  padding: 12px;
+  color: #dbe2ff;
+  font-size: 13px;
 }
 
-.section-head button {
-background:transparent;
-color:#c9d0ff;
-font-size:11px;
-}
-
-.videos {
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:9px;
-}
-
-.video {
-height:92px;
-border-radius:10px;
-position:relative;
-overflow:hidden;
-background:linear-gradient(140deg,#358d64,#162e48);
-}
-
-.video:nth-child(2) {
-background:linear-gradient(140deg,#9d42b5,#283d90);
-}
-
-.video:nth-child(3) {
-background:linear-gradient(140deg,#f0a66b,#5c3a3a);
-}
-
-.video:before {
-content:"▶";
-position:absolute;
-left:50%;
-top:50%;
-transform:translate(-50%,-50%);
-background:#ffffff44;
-border:1px solid #fff8;
-border-radius:50%;
-width:35px;
-height:35px;
-display:grid;
-place-items:center;
-}
-
-.video .duration {
-position:absolute;
-right:5px;
-bottom:5px;
-background:#000a;
-padding:3px 5px;
-border-radius:5px;
-font-size:10px;
-}
-
-.metrics {
-display:grid;
-grid-template-columns:repeat(3,1fr);
-gap:7px;
-}
-
-.metric {
-background:#24274e;
-border-radius:9px;
-padding:9px;
-}
-
-.metric b {
-display:block;
-font-size:17px;
-margin-top:3px;
-}
-
-.metric small {
-font-size:10px;
-color:#aab0d1;
+.empty {
+  color: var(--muted);
+  text-align: center;
+  padding: 25px;
 }
 
 .toast {
-position:fixed;
-bottom:20px;
-right:20px;
-background:#24294f;
-border:1px solid #5d65a1;
-padding:12px 17px;
-border-radius:12px;
-box-shadow:0 10px 30px #0005;
-display:none;
-z-index:9;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #242c51;
+  border: 1px solid #6675bc;
+  color: white;
+  padding: 12px 18px;
+  border-radius: 14px;
+  display: none;
+  z-index: 30;
+  box-shadow: 0 8px 30px #0006;
 }
 
-.modal {
-position:fixed;
-inset:0;
-background:#0009;
-display:none;
-place-items:center;
-padding:20px;
-z-index:10;
+@media(max-width:760px) {
+  .columns {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    display: none;
+  }
+
+  .platform-grid {
+    grid-template-columns: repeat(4,1fr);
+  }
+
+  .top {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .nav {
+    width: 100%;
+    margin: 0;
+  }
+
+  .toolbar {
+    flex-wrap: wrap;
+  }
+
+  .search {
+    flex-basis: 100%;
+  }
+
+  .selects {
+    grid-template-columns: repeat(2,1fr);
+  }
 }
 
-.modal-box {
-background:#171b3b;
-border:1px solid #444a7c;
-border-radius:15px;
-padding:20px;
-max-width:440px;
-width:100%;
-}
+@media(max-width:420px) {
+  .platform-grid {
+    gap: 7px;
+  }
 
-.modal-box h2 {
-margin-top:0;
-}
+  .platform {
+    padding: 10px 4px;
+  }
 
-.modal-box p {
-color:#b9bed9;
-line-height:1.5;
-}
+  .picon {
+    width: 43px;
+    height: 43px;
+  }
 
-.modal-box button {
-background:#5a36f5;
-padding:10px 14px;
-border-radius:9px;
-margin-top:8px;
-}
-
-@media(max-width:1100px) {
-.platforms {
-grid-template-columns:repeat(6,1fr);
-}
-
-.feed-body {
-grid-template-columns:150px 1fr;
-}
-
-.content-grid {
-grid-template-columns:minmax(0,1.4fr) minmax(270px,.8fr);
-}
-}
-
-@media(max-width:800px) {
-.app {
-grid-template-columns:1fr;
-}
-
-.sidebar {
-position:static;
-height:auto;
-padding:10px;
-border-right:0;
-border-bottom:1px solid var(--line);
-}
-
-.brand {
-padding:0 8px 10px;
-}
-
-.nav {
-display:flex;
-overflow:auto;
-gap:4px;
-}
-
-.nav button {
-white-space:nowrap;
-padding:8px 10px;
-}
-
-.nav .divider {
-display:none;
-}
-
-.main {
-padding:12px;
-}
-
-.topbar {
-gap:8px;
-}
-
-.user span:not(.online) {
-display:none;
-}
-
-.welcome {
-padding:14px;
-}
-
-.welcome h1 {
-font-size:18px;
-}
-
-.pro {
-display:none;
-}
-
-.platforms {
-grid-template-columns:repeat(6,1fr);
-}
-
-.picon {
-width:43px;
-height:43px;
-font-size:23px;
-}
-
-.content-grid,.bottom-grid {
-grid-template-columns:1fr;
-}
-
-.feed-body {
-grid-template-columns:1fr;
-}
-
-.feed-menu {
-display:none;
-}
-
-.feed-tabs {
-gap:7px;
-}
-
-.rightcol {
-grid-template-columns:1fr 1fr;
-}
-}
-
-@media(max-width:520px) {
-.rightcol {
-grid-template-columns:1fr;
-}
-
-.platforms {
-grid-template-columns:repeat(4,1fr);
-gap:4px;
-}
-
-.platform span {
-font-size:10px;
-}
-
-.feed-tabs button:nth-child(3),
-.feed-tabs button:nth-child(4) {
-display:none;
-}
-
-.feed-head {
-padding:10px;
-}
-
-.post-image {
-height:160px;
-}
-
-.videos {
-grid-template-columns:repeat(3,1fr);
-}
-
-.video {
-height:80px;
-}
-
-.welcome p {
-font-size:12px;
-}
-
-.top-actions {
-gap:8px;
-}
+  .welcome h2 {
+    font-size: 20px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
-
-<aside class="sidebar">
+<header>
+<div class="top">
 
 <div class="brand">
-<div class="brandmark">S</div>
+<div class="logo">S</div>
 <div>
 SocialHub
 <small>All Social Media in One</small>
@@ -965,664 +456,446 @@ SocialHub
 </div>
 
 <nav class="nav" id="nav">
-
-<button class="active" data-view="Home">
-<span class="ico">⌂</span>Home
-</button>
-
-<button data-view="Facebook">
-<span class="ico">🔵</span>Facebook
-</button>
-
-<button data-view="Instagram">
-<span class="ico">📸</span>Instagram
-</button>
-
-<button data-view="TikTok">
-<span class="ico">🎵</span>TikTok
-</button>
-
-<button data-view="YouTube">
-<span class="ico">▶️</span>YouTube
-</button>
-
-<button data-view="WhatsApp">
-<span class="ico">🟢</span>WhatsApp
-</button>
-
-<button data-view="Messenger">
-<span class="ico">💬</span>Messenger
-</button>
-
-<button data-view="X">
-<span class="ico">𝕏</span>X
-</button>
-
-<button data-view="LinkedIn">
-<span class="ico">💼</span>LinkedIn
-</button>
-
-<button data-view="Telegram">
-<span class="ico">✈️</span>Telegram
-</button>
-
-<button data-view="Threads">
-<span class="ico">🧵</span>Threads
-</button>
-
-<button data-view="Pinterest">
-<span class="ico">📌</span>Pinterest
-</button>
-
-<button data-view="Snapchat">
-<span class="ico">👻</span>Snapchat
-</button>
-
-<div class="divider"></div>
-
-<button data-view="Create Post">
-<span class="ico">➕</span>Create Post
-</button>
-
-<button data-view="Publish Everywhere">
-<span class="ico">📤</span>Publish Everywhere
-</button>
-
-<button data-view="Planner">
-<span class="ico">📅</span>Planner
-</button>
-
-<button data-view="Analytics">
-<span class="ico">📊</span>Analytics
-</button>
-
-<button data-view="Settings">
-<span class="ico">⚙️</span>Settings
-</button>
-
-<button data-view="Help">
-<span class="ico">❔</span>Help & Support
-</button>
-
+<button class="active" data-view="home">⌂ Home</button>
+<button data-view="Facebook">🔵 Facebook</button>
+<button data-view="Instagram">📸 Instagram</button>
+<button data-view="TikTok">♪ TikTok</button>
+<button data-view="YouTube">▶ YouTube</button>
+<button data-view="Watch">▶ Watch</button>
 </nav>
-</aside>
 
-<main class="main">
-
-<header class="topbar">
-
-<div class="search">
-🔎
-<input id="search" placeholder="Search posts, videos, or people...">
 </div>
+</header>
 
-<div class="top-actions">
+<main class="wrap">
 
-<button class="bell" onclick="toast('You are all caught up!')">
-🔔
-<span class="badge">12</span>
-</button>
+<div class="toolbar">
+
+<input class="search" id="search"
+placeholder="🔎 Search posts, videos, people...">
+
+<button class="iconbtn" id="bell">🔔 <span id="bellcount">3</span></button>
 
 <div class="user">
 <div class="avatar">SK</div>
 <div>
 <b>Solomon K.</b>
-<div class="online">Online</div>
+<div class="status">● Online</div>
 </div>
-⌄
+<button class="iconbtn" id="profile">⌄</button>
 </div>
 
 </div>
-</header>
 
 <section class="welcome">
-
-<div>
-<h1>👋 Welcome back, Solomon!</h1>
+<h2>👋 Welcome to SocialHub!</h2>
 <p>Manage, watch and share across all your social media accounts.</p>
-</div>
+</section>
 
-<div class="pro">
-👑
+<div class="platform-grid" id="platforms"></div>
+
+<div class="columns">
+
 <div>
-<b>Pro Plan</b><br>
-Valid until Dec 2026
-</div>
-<button onclick="toast('Upgrade plans will be available soon.')">Upgrade</button>
-</div>
 
-</section>
+<section class="card composer">
 
-<section class="platforms" id="platforms"></section>
-
-<div class="content-grid">
-
-<section class="feed-card">
-
-<div class="feed-head">
-<span id="feedLogo" style="font-size:25px">🔵</span>
-<strong id="feedName">Facebook</strong>
-<span>⌄</span>
-
-<div class="feed-tabs">
-<button class="active" onclick="setTab(this,'Home')">Home</button>
-<button onclick="setTab(this,'Watch')">Watch</button>
-<button onclick="setTab(this,'Friends')">Friends</button>
-<button onclick="setTab(this,'Groups')">Groups</button>
-🔎 🔔
-</div>
+<div class="cardhead">
+✍️ Create a post
+<span id="postcount" class="status">0 posts</span>
 </div>
 
-<div class="feed-body">
+<div class="cardbody">
 
-<aside class="feed-menu">
+<textarea id="posttext"
+placeholder="What's on your mind? Write once and choose where to share..."></textarea>
 
-<div class="profile-mini">
-<div class="avatar">SK</div>
-Solomon K.
-</div>
+<div class="row">
 
-<button>👥 Friends</button>
-<button>🕘 Memories</button>
-<button>🔖 Saved</button>
-<button>👨‍👩‍👧 Groups</button>
-<button>🎬 Video</button>
-<button>🏪 Marketplace</button>
-<button>⌄ See more</button>
+<label class="btn" for="media">🖼️ Photo / video</label>
+<input type="file" class="file" id="media" accept="image/*,video/*" multiple>
 
-<b style="display:block;margin:14px 0 6px;font-size:11px">
-Your Shortcuts
-</b>
-
-<button>📰 Kenya News</button>
-<button>📱 Tech Tips</button>
-<button>😂 Funny Videos</button>
-
-</aside>
-
-<div class="feed-main">
-
-<div class="postbox">
-
-<div class="postbox-top">
-<div class="avatar">SK</div>
-<input placeholder="What's on your mind, Solomon?" onclick="document.getElementById('postText').focus()">
-</div>
-
-<div class="post-actions">
-<button>🔴 Live video</button>
-<button>🟩 Photo/video</button>
-<button>😊 Feeling/activity</button>
-</div>
+<button class="btn" id="emoji">😊 Emoji</button>
+<button class="btn" id="clear">Clear</button>
 
 </div>
 
-<article class="post">
+<div class="preview" id="preview"></div>
 
-<div class="post-title">
-<div class="avatar" style="background:#408b54">🌳</div>
-<div>
-<b>Nature Lovers <span style="color:#1685ff">✓</span></b>
-<small>2h · 🌐</small>
-</div>
-<span style="margin-left:auto">•••</span>
+<div style="margin-top:14px;font-weight:700">
+Choose platforms
 </div>
 
-<div class="post-text">
-Beautiful sunset in Kenya! ❤️🇰🇪<br>
-<span style="color:#0864ee">
-#Kenya #Nature #Travel #BeautifulPlaces
-</span>
+<div class="selects" id="checks"></div>
+
+<div class="row">
+<button class="btn" id="selectall">Select all</button>
+<button class="btn" id="selectnone">Clear selection</button>
+<button class="btn primary" id="publish">🚀 Publish post</button>
 </div>
 
-<div class="post-image sunset"></div>
-
-<div class="post-stats">
-<span>👍 ❤️ 12K</span>
-<span>356 comments · 729 shares</span>
+<div class="notice" style="margin-top:12px">
+Demo mode: posts appear in your SocialHub feed. Real publishing requires official platform authorization and API access.
+Never enter your social media passwords here.
 </div>
-
-<div class="post-buttons">
-<button onclick="toast('Like action is a demo in this prototype.')">👍 Like</button>
-<button onclick="toast('Commenting is a demo in this prototype.')">💬 Comment</button>
-<button onclick="toast('Share action is a demo in this prototype.')">↗ Share</button>
-</div>
-
-</article>
-
-<article class="post">
-
-<div class="post-title">
-<div class="avatar" style="background:#b63bdb">💡</div>
-<div>
-<b>Tech Tips Kenya</b>
-<small>1h · 🌐</small>
-</div>
-</div>
-
-<div class="post-text">
-5 useful smartphone tricks you should know.
-Watch the short video and share with a friend!
-</div>
-
-<div class="post-image" style="background:linear-gradient(135deg,#3044a7,#18b6a2);display:grid;place-items:center;color:white;font-size:35px">
-▶️ Video preview
-</div>
-
-<div class="post-stats">
-<span>👍 2.4K</span>
-<span>88 comments · 124 shares</span>
-</div>
-
-<div class="post-buttons">
-<button onclick="toast('Like action is a demo in this prototype.')">👍 Like</button>
-<button onclick="toast('Commenting is a demo in this prototype.')">💬 Comment</button>
-<button onclick="toast('Share action is a demo in this prototype.')">↗ Share</button>
-</div>
-
-</article>
-
-</div>
-</div>
-</section>
-
-<aside class="rightcol">
-
-<section class="side-card">
-
-<div class="side-title">📝 Create Post</div>
-
-<div class="composer">
-
-<textarea id="postText" placeholder="Share something amazing..."></textarea>
-
-<div class="media-buttons">
-
-<button onclick="document.getElementById('media').click()">🟩 Photo</button>
-
-<button onclick="document.getElementById('media').click()">🎬 Video</button>
-
-<button onclick="insertEmoji()">😊 Emoji</button>
-
-<input type="file" id="media" accept="image/*,video/*" hidden onchange="fileSelected(this)">
-
-</div>
-
-<div id="fileName" style="font-size:11px;color:#555"></div>
-
-<div class="select-row">
-Select Accounts:
-<button onclick="selectAll()">Select All</button>
-</div>
-
-<div class="account-picks" id="accountPicks"></div>
-
-<button class="publish" onclick="publish()">
-➤ Publish to Selected Accounts
-</button>
 
 </div>
 </section>
 
-<section class="side-card">
+<section class="card">
 
-<div class="connected">
-
-<div class="connected-head">
-Connected Accounts
-<button onclick="manageAccounts()">Manage</button>
+<div class="cardhead">
+<span id="feedtitle">📰 Your SocialHub feed</span>
+<button class="btn" id="refresh">↻ Refresh</button>
 </div>
 
-<div class="connected-grid" id="connectedGrid"></div>
-
-</div>
+<div class="cardbody" id="feed"></div>
 
 </section>
+
+</div>
+
+<aside class="sidebar">
+
+<div class="card">
+<div class="cardhead">📊 Your overview</div>
+
+<div class="cardbody">
+<div class="stat"><span>Posts created</span><b id="statposts">0</b></div>
+<div class="stat"><span>Connected accounts</span><b id="statconnected">0</b></div>
+<div class="stat"><span>Selected platforms</span><b id="statselected">0</b></div>
+</div>
+</div>
+
+<div class="card">
+<div class="cardhead">🔗 Account connections</div>
+<div class="cardbody" id="connections"></div>
+</div>
+
+<div class="notice">
+Connect buttons open platform websites. Secure account linking requires official OAuth/API integration.
+</div>
 
 </aside>
 
 </div>
-
-<div class="bottom-grid">
-
-<section class="video-card">
-
-<div class="section-head">
-▶ Videos For You
-<button onclick="toast('Video discovery is a demo feed.')">See All →</button>
-</div>
-
-<div class="videos">
-
-<div class="video">
-<span class="duration">15:24</span>
-</div>
-
-<div class="video">
-<span class="duration">03:12</span>
-</div>
-
-<div class="video">
-<span class="duration">01:20</span>
-</div>
-
-</div>
-
-</section>
-
-<section class="analytics">
-
-<div class="section-head">
-📊 Analytics Overview
-<button>Last 7 days⌄</button>
-</div>
-
-<div class="metrics">
-
-<div class="metric">
-<span>👁️</span>
-<b>245K</b>
-<small>Views</small>
-</div>
-
-<div class="metric">
-<span>❤️</span>
-<b>32K</b>
-<small>Likes</small>
-</div>
-
-<div class="metric">
-<span>↗️</span>
-<b>18K</b>
-<small>Shares</small>
-</div>
-
-</div>
-
-</section>
-
-</div>
-
 </main>
-</div>
 
 <div class="toast" id="toast"></div>
 
-<div class="modal" id="modal">
-
-<div class="modal-box">
-
-<h2 id="modalTitle">SocialHub</h2>
-
-<p id="modalText"></p>
-
-<button onclick="closeModal()">Close</button>
-
-</div>
-</div>
-
 <script>
 
-const platforms=[
-{name:'Facebook',icon:'f',emoji:'🔵',class:'facebook'},
-{name:'Instagram',icon:'◎',emoji:'📸',class:'instagram'},
-{name:'TikTok',icon:'♪',emoji:'🎵',class:'tiktok'},
-{name:'YouTube',icon:'▶',emoji:'▶️',class:'youtube'},
-{name:'WhatsApp',icon:'◉',emoji:'🟢',class:'whatsapp'},
-{name:'Messenger',icon:'ϟ',emoji:'💬',class:'messenger'},
-{name:'X',icon:'𝕏',emoji:'𝕏',class:'x'},
-{name:'LinkedIn',icon:'in',emoji:'💼',class:'linkedin'},
-{name:'Telegram',icon:'➤',emoji:'✈️',class:'telegram'},
-{name:'Threads',icon:'@',emoji:'🧵',class:'threads'},
-{name:'Pinterest',icon:'P',emoji:'📌',class:'pinterest'},
-{name:'Snapchat',icon:'♟',emoji:'👻',class:'snapchat'}
+const platforms = [
+{name:'Facebook',icon:'f',color:'#1877f2'},
+{name:'Instagram',icon:'◎',color:'linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045)'},
+{name:'TikTok',icon:'♪',color:'#050505'},
+{name:'YouTube',icon:'▶',color:'#ff0000'},
+{name:'WhatsApp',icon:'◉',color:'#18bd66'},
+{name:'Messenger',icon:'ϟ',color:'#1685fa'},
+{name:'X',icon:'𝕏',color:'#000'},
+{name:'LinkedIn',icon:'in',color:'#0a66c2'},
+{name:'Telegram',icon:'➤',color:'#26a5e4'},
+{name:'Threads',icon:'@',color:'#101010'},
+{name:'Pinterest',icon:'P',color:'#bd081c'},
+{name:'Snapchat',icon:'♟',color:'#ffeb00'}
 ];
 
-let connected=JSON.parse(localStorage.getItem('sh_connected')||
-'["Facebook","Instagram","TikTok","YouTube","WhatsApp","X"]');
+let posts = [];
+let connected = new Set();
+let selected = new Set(['Facebook']);
+let mediaFiles = [];
 
-let selected=new Set([
-'Facebook',
-'Instagram',
-'TikTok',
-'YouTube',
-'X',
-'LinkedIn'
-]);
+const $ = id => document.getElementById(id);
 
-function iconMarkup(p){
-return `<div class="picon ${p.class}">${p.icon}</div>`;
+function toast(msg) {
+  let t = $('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+
+  clearTimeout(window.toastTimer);
+
+  window.toastTimer = setTimeout(() => {
+    t.style.display = 'none';
+  }, 2600);
 }
 
-function renderPlatforms(){
+function renderPlatforms() {
 
-document.getElementById('platforms').innerHTML=
-platforms.map(p=>`
+  $('platforms').innerHTML = platforms.map(p => `
+    <button class="platform" data-platform="${p.name}">
+      <div class="picon" style="background:${p.color}">${p.icon}</div>
+      <div class="pname">${p.name}</div>
+      <div class="connected">
+        ${connected.has(p.name) ? '✓ Connected' : 'Tap to open'}
+      </div>
+    </button>
+  `).join('');
 
-<button class="platform" onclick="openPlatform('${p.name}')">
-
-${iconMarkup(p)}
-
-<span>${p.name}</span>
-
-</button>
-
-`).join('');
-
+  $('platforms').querySelectorAll('[data-platform]').forEach(b => {
+    b.onclick = () => platformAction(b.dataset.platform);
+  });
 }
 
-function renderPicks(){
+function renderChecks() {
 
-document.getElementById('accountPicks').innerHTML=
-platforms.map(p=>`
+  $('checks').innerHTML = platforms.map(p => `
+    <label class="check">
+      <input type="checkbox" value="${p.name}"
+      ${selected.has(p.name) ? 'checked' : ''}>
+      ${p.name}
+    </label>
+  `).join('');
 
-<button class="pick ${selected.has(p.name)?'checked':''}"
-title="${p.name}"
-onclick="togglePick('${p.name}')">
+  $('checks').querySelectorAll('input').forEach(c => {
+    c.onchange = () => {
+      c.checked ? selected.add(c.value) : selected.delete(c.value);
+      stats();
+    };
+  });
 
-${iconMarkup(p)}
-
-<span class="check">✓</span>
-
-</button>
-
-`).join('');
-
+  stats();
 }
 
-function renderConnected(){
+function renderConnections() {
 
-document.getElementById('connectedGrid').innerHTML=
-platforms.filter(p=>connected.includes(p.name))
-.slice(0,6)
-.map(p=>`
+  $('connections').innerHTML = platforms.map(p => `
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0">
+      <span>${p.icon} ${p.name}</span>
+      <button class="btn" style="padding:6px 9px;font-size:12px"
+      data-connect="${p.name}">
+        ${connected.has(p.name) ? 'Connected' : 'Connect'}
+      </button>
+    </div>
+  `).join('');
 
-<div class="conn">
-
-${iconMarkup(p)}
-
-<span class="status">Connected</span>
-
-</div>
-
-`).join('')||
-'<p style="font-size:12px;color:#aab">No accounts connected yet.</p>';
-
+  $('connections').querySelectorAll('[data-connect]').forEach(b => {
+    b.onclick = () => connect(b.dataset.connect);
+  });
 }
 
-function togglePick(n){
+function connect(name) {
 
-selected.has(n)
-?selected.delete(n)
-:selected.add(n);
+  connected.add(name);
 
-renderPicks();
+  renderPlatforms();
+  renderConnections();
+  stats();
 
+  toast(name + ' marked connected in demo mode.');
 }
 
-function selectAll(){
+function platformAction(name) {
 
-selected=new Set(platforms.map(p=>p.name));
+  if(name === 'Watch') {
+    showView('Watch');
+    return;
+  }
 
-renderPicks();
-
+  connect(name);
+  showView(name);
 }
 
-function openPlatform(n){
+function showView(view) {
 
-document.querySelectorAll('.nav button')
-.forEach(b=>b.classList.toggle('active',b.dataset.view===n));
+  document.querySelectorAll('#nav button').forEach(b => {
+    b.classList.toggle('active', b.dataset.view === view);
+  });
 
-document.getElementById('feedName').textContent=n;
+  $('feedtitle').textContent =
+    view === 'home'
+    ? '📰 Your SocialHub feed'
+    : view === 'Watch'
+    ? '▶ Watch videos'
+    : '🌐 ' + view + ' dashboard';
 
-let p=platforms.find(x=>x.name===n);
-
-document.getElementById('feedLogo').textContent=p?p.emoji:'🌐';
-
-toast(n+' view selected. This is a UI preview; real platform feeds require official integrations.');
-
+  toast(view + ' selected. Create posts using the composer.');
 }
 
-function setTab(btn,tab){
+function stats() {
 
-document.querySelectorAll('.feed-tabs button')
-.forEach(b=>b.classList.remove('active'));
-
-btn.classList.add('active');
-
-toast(tab+' tab selected (demo).');
-
+  $('statposts').textContent = posts.length;
+  $('statconnected').textContent = connected.size;
+  $('statselected').textContent = selected.size;
+  $('postcount').textContent = posts.length + ' posts';
 }
 
-function toast(msg){
+function renderFeed(filter = '') {
 
-let t=document.getElementById('toast');
+  let list = posts.filter(p =>
+    !filter || p.text.toLowerCase().includes(filter.toLowerCase())
+  );
 
-t.textContent=msg;
+  if(!list.length) {
+    $('feed').innerHTML =
+      '<div class="empty">No posts yet. Create your first post above ✨</div>';
+    return;
+  }
 
-t.style.display='block';
+  $('feed').innerHTML = list.slice().reverse().map(p => `
+    <article class="feedpost">
 
-clearTimeout(window.toastTimer);
+      <div class="feedhead">
+        <div class="avatar">SK</div>
+        <div>
+          Solomon K.
+          <small style="display:block;color:#77809b;font-weight:400">
+            ${p.time} · SocialHub
+          </small>
+        </div>
+      </div>
 
-window.toastTimer=setTimeout(()=>{
-t.style.display='none';
-},3200);
+      <p>${escapeHtml(p.text)}</p>
 
+      ${p.media.map(m =>
+        m.type.startsWith('image')
+        ? `<img src="${m.url}" style="max-width:100%;max-height:360px;border-radius:12px;margin:5px 0">`
+        : `<video controls src="${m.url}" style="max-width:100%;max-height:360px;border-radius:12px;margin:5px 0"></video>`
+      ).join('')}
+
+      <small>Shared to: ${p.platforms.join(', ')}</small>
+
+      <div class="postactions">
+        <button onclick="likePost(${p.id})">👍 Like <span>${p.likes}</span></button>
+        <button onclick="toast('Comments are demo-only')">💬 Comment</button>
+        <button onclick="sharePost(${p.id})">↗ Share</button>
+      </div>
+
+    </article>
+  `).join('');
 }
 
-function publish(){
+function escapeHtml(s) {
 
-let text=document.getElementById('postText').value.trim();
-
-if(!text){
-
-toast('Write something before publishing.');
-
-return;
-
+  return s.replace(/[&<>"']/g, c => ({
+    '&':'&amp;',
+    '<':'&lt;',
+    '>':'&gt;',
+    '"':'&quot;',
+    "'":'&#39;'
+  }[c]));
 }
 
-if(!selected.size){
+window.likePost = id => {
 
-toast('Select at least one account.');
+  let p = posts.find(p => p.id === id);
 
-return;
+  p.likes++;
 
-}
+  renderFeed($('search').value);
+};
 
-let names=[...selected].join(', ');
+window.sharePost = id => {
 
-showModal(
-'Publishing preview',
-'Your post is ready for '+selected.size+
-' selected account(s): '+names+
-'. In this HTML prototype, publishing is simulated only. To publish live, SocialHub needs official API integrations and secure server-side authorization.'
-);
+  let p = posts.find(p => p.id === id);
 
-}
+  if(navigator.share) {
+    navigator.share({text:p.text}).catch(()=>{});
+  } else {
+    navigator.clipboard?.writeText(p.text);
+    toast('Post text copied');
+  }
+};
 
-function showModal(title,txt){
+$('publish').onclick = () => {
 
-document.getElementById('modalTitle').textContent=title;
+  let text = $('posttext').value.trim();
 
-document.getElementById('modalText').textContent=txt;
+  if(!text && !mediaFiles.length) {
+    toast('Write something or attach media first');
+    return;
+  }
 
-document.getElementById('modal').style.display='grid';
+  if(!selected.size) {
+    toast('Select at least one platform');
+    return;
+  }
 
-}
+  posts.push({
+    id: Date.now(),
+    text,
+    platforms: [...selected],
+    time: 'Just now',
+    likes: 0,
+    media: mediaFiles.map(m => ({
+      type: m.type,
+      url: m.url
+    }))
+  });
 
-function closeModal(){
+  $('posttext').value = '';
+  mediaFiles = [];
+  $('preview').innerHTML = '';
+  $('media').value = '';
 
-document.getElementById('modal').style.display='none';
+  renderFeed($('search').value);
+  stats();
 
-}
+  toast('Post published to your SocialHub demo feed!');
+};
 
-function insertEmoji(){
+$('media').onchange = e => {
 
-let t=document.getElementById('postText');
+  mediaFiles = Array.from(e.target.files).map(f => ({
+    type: f.type,
+    url: URL.createObjectURL(f)
+  }));
 
-t.value+=' 😊';
+  $('preview').innerHTML = mediaFiles.map(m =>
+    m.type.startsWith('image')
+    ? `<img src="${m.url}">`
+    : `<video controls src="${m.url}"></video>`
+  ).join('');
+};
 
-t.focus();
+$('clear').onclick = () => {
 
-}
+  $('posttext').value = '';
+  mediaFiles = [];
+  $('preview').innerHTML = '';
+  $('media').value = '';
 
-function fileSelected(input){
+  toast('Composer cleared');
+};
 
-document.getElementById('fileName').textContent=
-input.files.length
-?`Selected: ${input.files[0].name}`
-:'';
+$('emoji').onclick = () => {
 
-}
+  $('posttext').value += ' 😊';
+  $('posttext').focus();
+};
 
-function manageAccounts(){
+$('selectall').onclick = () => {
 
-showModal(
-'Manage connected accounts',
-'Tap any platform above to explore its view. Account connection buttons are visual in this prototype; real OAuth login and account linking need backend/API setup.'
-);
+  selected = new Set(platforms.map(p => p.name));
+  renderChecks();
+};
 
-}
+$('selectnone').onclick = () => {
 
-document.querySelectorAll('#nav button[data-view]')
-.forEach(b=>b.addEventListener('click',()=>{
+  selected.clear();
+  renderChecks();
+};
 
-let v=b.dataset.view;
+$('search').oninput = () => renderFeed($('search').value);
 
-document.querySelectorAll('#nav button')
-.forEach(x=>x.classList.remove('active'));
+$('refresh').onclick = () => {
 
-b.classList.add('active');
+  renderFeed($('search').value);
+  toast('Feed refreshed');
+};
 
-if(platforms.some(p=>p.name===v)){
+$('bell').onclick = () => toast('You have 3 demo notifications');
 
-openPlatform(v);
+$('profile').onclick = () => toast('Profile menu coming next');
 
-}else{
-
-toast(v+' section selected (demo).');
-
-}
-
-}));
-
-document.getElementById('search')
-.addEventListener('input',e=>{
-
-if(e.target.value){
-
-toast('Search preview: '+e.target.value);
-
-}
-
+$('nav').querySelectorAll('button').forEach(b => {
+  b.onclick = () => showView(b.dataset.view);
 });
 
 renderPlatforms();
-
-renderPicks();
-
-renderConnected();
+renderChecks();
+renderConnections();
+renderFeed();
+stats();
 
 </script>
 
